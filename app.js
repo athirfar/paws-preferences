@@ -6,15 +6,16 @@ async function fetchCats() {
   const imageStack = document.getElementById('image-stack');
   const summary = document.getElementById('summary');
   const retry = document.getElementById('retry');
+  const feedback = document.getElementById('feedback');
 
   imageStack.innerHTML = '';
   summary.style.display = 'none';
   retry.style.display = 'none';
+  feedback.textContent = '';
   likedCats = [];
   currentIndex = 0;
   catUrls = [];
 
-  // Fetch 20 cat images
   for (let i = 0; i < 20; i++) {
     const res = await fetch('https://cataas.com/cat?json=true');
     const data = await res.json();
@@ -26,7 +27,9 @@ async function fetchCats() {
 
 function showNextCat() {
   const imageStack = document.getElementById('image-stack');
+  const feedback = document.getElementById('feedback');
   imageStack.innerHTML = '';
+  feedback.textContent = '';
 
   if (currentIndex >= catUrls.length) {
     showSummary();
@@ -51,8 +54,10 @@ function showNextCat() {
     if (diff > 50) {
       likedCats.push(catUrls[currentIndex]);
       img.style.transform = 'translateX(150%)';
+      feedback.textContent = '❤️ Liked!';
     } else if (diff < -50) {
       img.style.transform = 'translateX(-150%)';
+      feedback.textContent = '👋 Skipped!';
     } else {
       return;
     }
@@ -60,7 +65,7 @@ function showNextCat() {
     setTimeout(() => {
       currentIndex++;
       showNextCat();
-    }, 300);
+    }, 400);
   });
 }
 
@@ -69,7 +74,7 @@ function showSummary() {
   const likedCount = document.getElementById('liked-count');
   const likedCatsDiv = document.getElementById('liked-cats');
 
-  likedCount.textContent = `${likedCats.length} Cats Liked!`;
+  likedCount.textContent = `You liked ${likedCats.length} out of 20 cats!`;
   likedCatsDiv.innerHTML = '';
 
   likedCats.forEach(cat => {
@@ -83,6 +88,4 @@ function showSummary() {
 }
 
 document.getElementById('retry').addEventListener('click', fetchCats);
-
-// Start on load
 fetchCats();
