@@ -5,43 +5,51 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #fdfbfb, #ebedee);
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
 }
 
-#app {
+.container {
   width: 90%;
   max-width: 400px;
   text-align: center;
+  padding-top: 20px;
 }
 
 h1 {
-  margin: 20px 0;
+  font-size: 1.8rem;
   color: #333;
+  margin-bottom: 20px;
 }
 
 #image-stack {
   position: relative;
-  height: 400px;
+  height: 420px;
   margin-bottom: 20px;
   overflow: hidden;
 }
 
 .swipe-cat {
-  position: relative;
   width: 100%;
-  height: auto;
   border-radius: 12px;
-  transition: transform 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#feedback {
+  font-size: 1.2rem;
+  font-weight: bold;
+  height: 30px;
+  margin-bottom: 10px;
+  color: #444;
 }
 
 #summary {
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 #liked-cats {
@@ -61,15 +69,15 @@ h1 {
 
 button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #6c5ce7;
   color: white;
   border: none;
   border-radius: 6px;
   font-size: 16px;
   cursor: pointer;
-  margin-bottom: 20px;
+  transition: background-color 0.2s ease;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #5a4bd4;
 }

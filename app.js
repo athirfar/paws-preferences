@@ -2,7 +2,7 @@ let likedCats = [];
 let currentIndex = 0;
 let catUrls = [];
 
-async function fetchCats() {
+function fetchCats() {
   const imageStack = document.getElementById('image-stack');
   const summary = document.getElementById('summary');
   const retry = document.getElementById('retry');
@@ -16,10 +16,9 @@ async function fetchCats() {
   currentIndex = 0;
   catUrls = [];
 
+  // Generate 20 direct cat image URLs (no CORS issues)
   for (let i = 0; i < 20; i++) {
-    const res = await fetch('https://cataas.com/cat?json=true');
-    const data = await res.json();
-    catUrls.push('https://cataas.com/cat/' + data.id);
+    catUrls.push(`https://cataas.com/cat?timestamp=${Date.now()}-${i}`);
   }
 
   showNextCat();
