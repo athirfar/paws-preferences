@@ -3,6 +3,7 @@ let currentIndex = 0;
 let catUrls = [];
 
 function fetchCats() {
+  const loader = document.getElementById('loader');
   const imageStack = document.getElementById('image-stack');
   const summary = document.getElementById('summary');
   const retry = document.getElementById('retry');
@@ -12,16 +13,20 @@ function fetchCats() {
   summary.style.display = 'none';
   retry.style.display = 'none';
   feedback.textContent = '';
+  loader.style.display = 'block';
+
   likedCats = [];
   currentIndex = 0;
   catUrls = [];
 
-  // Generate 20 direct cat image URLs (no CORS issues)
-  for (let i = 0; i < 20; i++) {
-    catUrls.push(`https://cataas.com/cat?timestamp=${Date.now()}-${i}`);
-  }
-
-  showNextCat();
+  // Simulate a loading delay and populate images
+  setTimeout(() => {
+    for (let i = 0; i < 20; i++) {
+      catUrls.push(`https://cataas.com/cat?timestamp=${Date.now()}-${i}`);
+    }
+    loader.style.display = 'none';
+    showNextCat();
+  }, 1000);
 }
 
 function showNextCat() {
@@ -37,7 +42,7 @@ function showNextCat() {
 
   const img = document.createElement('img');
   img.src = catUrls[currentIndex];
-  img.className = 'swipe-cat';
+  img.className = 'swipe-cat fade-in';
   imageStack.appendChild(img);
 
   let startX = 0;
